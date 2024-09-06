@@ -12,7 +12,7 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
     const token = authHeader.split(' ')[1];
 
     try {
-      const decoded = jwt.verify(token, 'your_secret_key') as JwtPayload;
+      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your_secret_key') as JwtPayload;
       req.user = { id: decoded.userId };
       next();
     } catch (error) {
