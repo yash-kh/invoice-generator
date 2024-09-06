@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import authRoutes from './routes/authRoutes';
+import quotationRoutes from './routes/quotationRoutes';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -17,6 +18,7 @@ mongoose
 
 // Routes
 app.use('/api', authRoutes);
+app.use('/api', quotationRoutes);
 
 const PORT = process.env.PORT || 5000;
 
