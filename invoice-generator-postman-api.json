@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "87a158da-3db7-45cb-8918-b1fe80678b1a",
+		"name": "API Documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14659664"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"yash\",\n    \"email\": \"yas@gmail.com\",\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"yash@gmail.com\",\n    \"password\": \"12345678\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": []
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		},
+		{
+			"name": "Quotation",
+			"item": [
+				{
+					"name": "add-products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"products\": [{\n        \"name\": \"prod 1\",\n        \"qty\": 10,\n        \"rate\": 100\n    },{\n        \"name\": \"prod 2\",\n        \"qty\": 100,\n        \"rate\": 50\n    },{\n        \"name\": \"prod 3\",\n        \"qty\": 1,\n        \"rate\": 200\n    },{\n        \"name\": \"prod 4\",\n        \"qty\": 5,\n        \"rate\": 10\n    },{\n        \"name\": \"prod 5\",\n        \"qty\": 1,\n        \"rate\": 67\n    },{\n        \"name\": \"prod 1\",\n        \"qty\": 10,\n        \"rate\": 100\n    },{\n        \"name\": \"prod 2\",\n        \"qty\": 100,\n        \"rate\": 50\n    },{\n        \"name\": \"prod 3\",\n        \"qty\": 1,\n        \"rate\": 200\n    },{\n        \"name\": \"prod 4\",\n        \"qty\": 5,\n        \"rate\": 10\n    },{\n        \"name\": \"prod 5\",\n        \"qty\": 1,\n        \"rate\": 67\n    },{\n        \"name\": \"prod 1\",\n        \"qty\": 10,\n        \"rate\": 100\n    },{\n        \"name\": \"prod 2\",\n        \"qty\": 100,\n        \"rate\": 50\n    },{\n        \"name\": \"prod 3\",\n        \"qty\": 1,\n        \"rate\": 200\n    },{\n        \"name\": \"prod 4\",\n        \"qty\": 5,\n        \"rate\": 10\n    },{\n        \"name\": \"prod 5\",\n        \"qty\": 1,\n        \"rate\": 67\n    },{\n        \"name\": \"prod 1\",\n        \"qty\": 10,\n        \"rate\": 100\n    },{\n        \"name\": \"prod 2\",\n        \"qty\": 100,\n        \"rate\": 50\n    },{\n        \"name\": \"prod 3\",\n        \"qty\": 1,\n        \"rate\": 200\n    },{\n        \"name\": \"prod 4\",\n        \"qty\": 5,\n        \"rate\": 10\n    },{\n        \"name\": \"prod 5\",\n        \"qty\": 1,\n        \"rate\": 67\n    },{\n        \"name\": \"prod 1\",\n        \"qty\": 10,\n        \"rate\": 100\n    },{\n        \"name\": \"prod 2\",\n        \"qty\": 100,\n        \"rate\": 50\n    },{\n        \"name\": \"prod 3\",\n        \"qty\": 1,\n        \"rate\": 200\n    },{\n        \"name\": \"prod 4\",\n        \"qty\": 5,\n        \"rate\": 10\n    },{\n        \"name\": \"prod 5\",\n        \"qty\": 1,\n        \"rate\": 67\n    },{\n        \"name\": \"prod 1\",\n        \"qty\": 10,\n        \"rate\": 100\n    },{\n        \"name\": \"prod 2\",\n        \"qty\": 100,\n        \"rate\": 50\n    },{\n        \"name\": \"prod 3\",\n        \"qty\": 1,\n        \"rate\": 200\n    },{\n        \"name\": \"prod 4\",\n        \"qty\": 5,\n        \"rate\": 10\n    },{\n        \"name\": \"prod 5\",\n        \"qty\": 1,\n        \"rate\": 67\n    },{\n        \"name\": \"prod 1\",\n        \"qty\": 10,\n        \"rate\": 100\n    },{\n        \"name\": \"prod 2\",\n        \"qty\": 100,\n        \"rate\": 50\n    },{\n        \"name\": \"prod 3\",\n        \"qty\": 1,\n        \"rate\": 200\n    },{\n        \"name\": \"prod 4\",\n        \"qty\": 5,\n        \"rate\": 10\n    },{\n        \"name\": \"prod 5\",\n        \"qty\": 1,\n        \"rate\": 67\n    },{\n        \"name\": \"prod 1\",\n        \"qty\": 10,\n        \"rate\": 100\n    },{\n        \"name\": \"prod 2\",\n        \"qty\": 100,\n        \"rate\": 50\n    },{\n        \"name\": \"prod 3\",\n        \"qty\": 1,\n        \"rate\": 200\n    },{\n        \"name\": \"prod 4\",\n        \"qty\": 5,\n        \"rate\": 10\n    },{\n        \"name\": \"prod 5\",\n        \"qty\": 1,\n        \"rate\": 67\n    }]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/add-products",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"add-products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "quotations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/quotations",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"quotations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "quotations by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/quotations/66db0dbaf9df33cc56e808ad/download",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"quotations",
+								"66db0dbaf9df33cc56e808ad",
+								"download"
+							],
+							"query": [
+								{
+									"key": "format",
+									"value": "image",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://farming-simulator.pstmn.io"
+		},
+		{
+			"key": "token",
+			"value": "1"
+		},
+		{
+			"key": "variable_key",
+			"value": ""
+		},
+		{
+			"key": "host",
+			"value": "https://inv-gen-latest.onrender.com"
+		}
+	]
+}
