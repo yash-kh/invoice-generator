@@ -21,6 +21,20 @@ export const generateInvoicePDF = async (products: Product[]): Promise<Buffer> =
   return Buffer.from(pdfBuffer);
 };
 
+export const generateInvoiceImage = async (products: Product[]): Promise<Buffer> => {
+  const htmlContent = generateInvoiceHTML(products);
+
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+
+  await page.setContent(htmlContent, { waitUntil: "networkidle0" });
+
+  const imageBuffer = await page.screenshot({ type: 'png', fullPage: true });
+  await browser.close();
+
+  return Buffer.from(imageBuffer);
+};
+
 const generateInvoiceHTML = (products: Product[]): string => {
   let productRows = "";
   products.forEach((product) => {

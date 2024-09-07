@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { z } from "zod";
 import Quotation from "../models/Quotation";
-import { generateInvoicePDF } from "../utils/template";
+import { generateInvoiceImage, generateInvoicePDF } from "../utils/template";
 import { addProductsSchema } from "../utils/zod";
 
 export const addProducts = async (req: Request, res: Response) => {
@@ -62,6 +62,7 @@ export const downloadQuotation = async (req: Request, res: Response) => {
   try {
     const userId = req.user?.id;
     const { id } = req.params;
+    const { format } = req.query;
 
     const quotation = await Quotation.findOne({
       _id: id,
@@ -72,15 +73,29 @@ export const downloadQuotation = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "Quotation not found." });
     }
 
-    // Set response headers to indicate a file download
-    res.setHeader("Content-Type", "application/pdf");
-    res.setHeader(
-      "Content-Disposition",
-      `attachment; filename="invoice_${id}.pdf"`
-    );
+    if (format === "image") {
+      const imageBuffer = await generateInvoiceImage(quotation.products);
 
-    // Send the PDF buffer to the client
-    res.send(quotation.pdfBuffer);
+      // Set response headers to indicate an image download
+      res.setHeader("Content-Type", "image/png");
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename="invoice_${id}.png"`
+      );
+
+      // Send the image buffer to the client
+      res.send(imageBuffer);
+    } else {
+      // Default to PDF
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename="invoice_${id}.pdf"`
+      );
+
+      // Send the PDF buffer to the client
+      res.send(quotation.pdfBuffer);
+    }
   } catch (error: any) {
     res.status(400).json({ message: error.message });
   }
